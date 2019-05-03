@@ -26,6 +26,7 @@ public class ListDataActivity extends AppCompatActivity {
         populateListView();
     }
 
+    //get the data from the database and show them all
     private void populateListView() {
         Cursor data = mDatabaseHelper.getData();
         ArrayList<WIFIInformation> listData = new ArrayList<>();

@@ -50,6 +50,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return true;
     }
 
+    //get the data from the database
     public Cursor getData(){
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "SELECT * FROM " + TABLE_NAME;

@@ -6,18 +6,12 @@ import android.app.Service;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.location.Address;
-import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.Settings;
-
-import java.io.IOException;
-import java.util.List;
-import java.util.Locale;
 
 public class GPSService extends Service implements LocationListener {
     // saving the context for later use
@@ -98,53 +92,7 @@ public class GPSService extends Service implements LocationListener {
         isLocationAvailable = false;
         return null;
     }
-    /*
-    Gives you complete address of the location
-    @return complete address in String
-    */
-    public String getLocationAddress() {
-        if (isLocationAvailable) {
-            Geocoder geocoder = new Geocoder(mContext, Locale.getDefault());
-// Get the current location from the input parameter list
-// Create a list to contain the result address
-            List<Address> addresses = null;
-            try {
-// Return 1 address.
-                addresses = geocoder.getFromLocation(mLatitude, mLongitude, 1);
-            } catch (IOException e1) {
-                e1.printStackTrace();
-                return ("IO Exception trying to get address:" + e1);
-            } catch (IllegalArgumentException e2) {
-// Error message to post in the log
-                String errorString = "Illegal arguments "
-                        + Double.toString(mLatitude) + " , "
-                        + Double.toString(mLongitude)
-                        + " passed to address service";
-                e2.printStackTrace();
-                return errorString;
-            }
-// If the reverse geocode returned an address
-            if (addresses != null && addresses.size() > 0) {
-// Get the first address
-                Address address = addresses.get(0);
-// Format the first line of address (if available), city, and country name.
-                String addressText = String.format(
-                        "%s, %s, %s",
-// If there's a street address, add it
-                        address.getMaxAddressLineIndex() > 0 ? address.getAddressLine(0) : "",
-// Locality is usually a city
-                        address.getLocality(),
-// The country of the address
-                        address.getCountryName());
-// Return the text
-                return addressText;
-            } else {
-                return "No address found by the service: Note to the developers, If no address is found by google itself, there is nothing you can do about it.";
-            }
-        } else {
-            return "Location Not available";
-        }
-    }
+
     /*
     get latitude
     @return latitude in double

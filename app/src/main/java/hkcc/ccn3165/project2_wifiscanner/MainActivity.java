@@ -64,8 +64,7 @@ public class MainActivity extends AppCompatActivity {
         //checking permission
         if (ContextCompat.checkSelfPermission(MainActivity.this,
                 Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(MainActivity.this, "You have already granted location permission!",
-                    Toast.LENGTH_SHORT).show();
+            toastMessage("You have already granted location permission!");
         } else {
             requestStoragePermission();
         }
@@ -87,13 +86,13 @@ public class MainActivity extends AppCompatActivity {
                 for(WIFIInformation insert:wifiList) {
                     insertData = mDatabaseHelper.addData(insert.getLongitude(), insert.getLatitude(), insert.getBSSID(), insert.getSSID(), insert.getDate(), insert.getTime());
                     if (insertData) {
-                        Toast.makeText(MainActivity.this, "Data inserted", Toast.LENGTH_SHORT).show();
+                        toastMessage("Data inserted");
                     } else {
-                        Toast.makeText(MainActivity.this, "Data not inserted", Toast.LENGTH_SHORT).show();
+                        toastMessage("Data not inserted");
                     }
                 }
                 if(insertData == false)
-                    Toast.makeText(MainActivity.this, "No data is inserted", Toast.LENGTH_SHORT).show();
+                    toastMessage("No data is inserted");
             }
         });
 
@@ -121,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
         wifiManger = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
 
         if(!wifiManger.isWifiEnabled()){
-            Toast.makeText(this, "WIFI is not enabled. We need to enable it", Toast.LENGTH_LONG).show();
+            toastMessage("WIFI is not enabled. We need to enable it");
             wifiManger.setWifiEnabled(true);
         }
 
@@ -153,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
                     scanHandler.removeCallbacks(locationUpdate);
                     unregisterReceiver(wifiReceiver);
                 }catch (Exception e){
-                    Toast.makeText(MainActivity.this, "No WiFi is scanning", Toast.LENGTH_SHORT).show();
+                    toastMessage("No WiFi is scanning");
                 }
             }
         });
@@ -164,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
     private void scanWifi() {
         registerReceiver(wifiReceiver, new IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION));
         wifiManger.startScan();
-        Toast.makeText(this, "Scanning WiFi", Toast.LENGTH_SHORT).show();
+        toastMessage("Scanning WiFi");
     }
 
     BroadcastReceiver wifiReceiver = new BroadcastReceiver() {
@@ -173,6 +172,7 @@ public class MainActivity extends AppCompatActivity {
             results = wifiManger.getScanResults();
             unregisterReceiver(this);
 
+            //getting the scan result and combine with the location, date and time
             for(ScanResult scanResult : results){
                 double latitude;
                 double longitude;
@@ -180,19 +180,19 @@ public class MainActivity extends AppCompatActivity {
                 mGPSService.getLocation();
                 if (mGPSService.isLocationAvailable == false) {
                     // Ask the user to try again, using return; for that
-                    Toast.makeText(MainActivity.this, "Your location is not available", Toast.LENGTH_SHORT).show();
+                    toastMessage("Your location is not available");
                     return;
                 }else{
                     latitude = mGPSService.getLatitude();
                     longitude = mGPSService.getLongitude();
                 }
                 Calendar calendar = Calendar.getInstance();
-                SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
+                SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss"); //set the format of time
                 String time = timeFormat.format(calendar.getTime());
-                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/YYYY");
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/YYYY"); //set the format of date
                 String date = dateFormat.format(calendar.getTime());
 
-                WIFIInformation wifi = new WIFIInformation("longitude: " + Double.toString(longitude), "latitude: " + Double.toString(latitude),"BSSID: " + scanResult.BSSID, "SSID: " +scanResult.SSID,"Date: " + date, "Time: " + time);
+                WIFIInformation wifi = new WIFIInformation("longitude: " + longitude, "latitude: " + latitude,"BSSID: " + scanResult.BSSID, "SSID: " +scanResult.SSID,"Date: " + date, "Time: " + time);
                 wifiList.add(wifi);
                 adapter.notifyDataSetChanged();
                 mGPSService.closeGPS();
@@ -252,9 +252,9 @@ public class MainActivity extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == LOCATION_PERMISSION_CODE)  {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this, "Permission GRANTED", Toast.LENGTH_SHORT).show();
+                toastMessage("Permission GRANTED");
             } else {
-                Toast.makeText(this, "Permission DENIED", Toast.LENGTH_SHORT).show();
+                toastMessage("Permission DENIED");
             }
         }
     }
@@ -267,8 +267,12 @@ public class MainActivity extends AppCompatActivity {
             scanHandler.removeCallbacks(locationUpdate);
             unregisterReceiver(wifiReceiver);
         }catch (Exception e){
-            Toast.makeText(MainActivity.this, "No receiver is registered", Toast.LENGTH_SHORT).show();
+            toastMessage("No receiver is registered");
         }
 
+    }
+
+    public void toastMessage(String message){
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 }
