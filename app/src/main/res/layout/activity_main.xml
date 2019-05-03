@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="80"
+    tools:context=".MainActivity">
+
+    <ListView
+        android:id="@+id/WIFIListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_weight="80">
+    </ListView>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:layout_weight="10"
+        android:weightSum="100"
+        >
+
+        <Button
+            android:id="@+id/scanWIFI"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:text="Scan"
+            android:textColor="@android:color/black"
+            android:layout_weight="20"/>
+        <Button
+            android:id="@+id/stopWIFI"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:text="stop"
+            android:textColor="@android:color/black"
+            android:layout_weight="20"/>
+
+        <Button
+            android:id="@+id/saveWIFI"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom"
+            android:layout_weight="20"
+            android:textColor="@android:color/black"
+            android:text="save" />
+
+        <Button
+            android:id="@+id/openWIFI"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:text="open"
+            android:textColor="@android:color/black"
+            android:layout_weight="20"/>
+
+        <Button
+            android:id="@+id/emailWIFI"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:text="email"
+            android:textColor="@android:color/black"
+            android:layout_weight="20"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:layout_weight="5">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Time dutation for each scan: "
+            android:textColor="@android:color/black"/>
+        <EditText
+            android:id="@+id/waitTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:textColor="@android:color/black"/>
+        <Button
+            android:id="@+id/btnSubmit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="submit" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/displayCurrentWaitingTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="5"
+        android:layout_gravity="center"
+        android:textColor="@android:color/black"/>
+
+</LinearLayout>

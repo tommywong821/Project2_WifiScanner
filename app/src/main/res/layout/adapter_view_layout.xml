@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <TextView
+        android:id="@+id/WIFILongitude"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="longitude"
+        android:textSize="16dp"
+        android:textColor="@android:color/black"
+        />
+    <TextView
+        android:id="@+id/WIFILatitude"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Latitude"
+        android:textSize="16dp"
+        android:textColor="@android:color/black"
+        />
+    <TextView
+        android:id="@+id/WIFIBSSID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="BSSID"
+        android:textSize="16dp"
+        android:textColor="@android:color/black"
+        />
+    <TextView
+        android:id="@+id/WIFISSID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SSID"
+        android:textSize="16dp"
+        android:textColor="@android:color/black"
+        />
+    <TextView
+        android:id="@+id/WIFIDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Date"
+        android:textSize="16dp"
+        android:textColor="@android:color/black"
+        />
+    <TextView
+        android:id="@+id/WIFITime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Time"
+        android:textSize="16dp"
+        android:textColor="@android:color/black"
+        />
+
+</LinearLayout>
