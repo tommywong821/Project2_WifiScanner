@@ -76,5 +76,6 @@ public class SendEmailActivity extends AppCompatActivity {
         emailIntent.setType("message/rfc822");
         startActivity(Intent.createChooser(emailIntent, "Choose an email client"));
         finish();
+
     }
 }
